@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About - Student Portal</title>
+    <link rel="stylesheet" href="../assets/css/rebrand.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: #1a202c;
+            background-color: #f7fafc;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #674425 0%, #6a3e1c 100%);
+            color: white;
+            padding: 0;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+        
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: white;
+            text-decoration: none;
+        }
+        
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 0;
+        }
+        
+        nav a {
+            color: rgba(255, 255, 255, 0.9);
+            text-decoration: none;
+            padding: 0.75rem 1.5rem;
+            font-weight: 500;
+            transition: all 0.2s ease;
+            border-radius: 6px;
+            margin: 0 0.25rem;
+        }
+        
+        nav a:hover, nav a.active {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            transform: translateY(-1px);
+        }
+        
+        main {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+        
+        .about-header {
+            background: linear-gradient(135deg, #676596 0%, #807298 100%);
+            color: white;
+            padding: 4rem 3rem;
+            text-align: center;
+            border-radius: 16px;
+            margin: 3rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .about-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="white" opacity="0.05"/><circle cx="75" cy="75" r="1" fill="white" opacity="0.05"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+        }
+        
+        .about-header h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .about-header p {
+            font-size: 1.25rem;
+            opacity: 0.9;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin: 4rem 0;
+        }
+        
+        .mission, .vision {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 12px;
+            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+            border: 1px solid #e2e8f0;
+            position: relative;
+        }
+        
+        .mission::before, .vision::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #24215b, #271547);
+            border-radius: 12px 12px 0 0;
+        }
+        
+        .mission h2, .vision h2 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            color: #1e293b;
+        }
+        
+        .mission p, .vision p {
+            color: #64748b;
+            line-height: 1.7;
+        }
+        
+        .team {
+            margin: 4rem 0;
+        }
+        
+        .team h2 {
+            font-size: 2rem;
+            font-weight: 600;
+            margin-bottom: 2rem;
+            color: #1e293b;
+            text-align: center;
+        }
+        
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .team-member {
+            text-align: center;
+            background: white;
+            padding: 2.5rem;
+            border-radius: 12px;
+            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+            border: 1px solid #e2e8f0;
+            transition: all 0.2s ease;
+        }
+        
+        .team-member:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 25px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+        
+        .team-member h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #1e293b;
+            margin-bottom: 0.5rem;
+        }
+        
+        .team-member p {
+            color: #64748b;
+            margin-bottom: 0.5rem;
+        }
+        
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+        
+        .stat-card {
+            text-align: center;
+            background: #3498db;
+            color: white;
+            padding: 2rem;
+            border-radius: 8px;
+        }
+        
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            display: block;
+        }
+        
+        footer {
+            background: #2c3e50;
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .author {
+            font-style: italic;
+            color: #7f8c8d;
+            margin-top: 1rem;
+        }
+
+        @media (max-width: 768px) {
+            .about-content {
+                grid-template-columns: 1fr;
+            }
+            
+            nav ul {
+                flex-wrap: wrap;
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <a href="index.html" class="logo">Student Portal</a>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html" class="active">About</a></li>
+                    <li><a href="registration.html">Registration</a></li>
+                    <li><a href="login.html">Login</a></li>
+                    <li><a href="dashboard.html">Dashboard</a></li>
+                    <li><a href="events.html">Events</a></li>
+                    <li><a href="profile.html">Profile</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="faq.html">FAQ</a></li>
+                    <li><a href="admin.html">Admin</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="about-header">
+            <h1>About Student Portal</h1>
+            <p>Empowering students through comprehensive digital solutions and innovative technology</p>
+        </section>
+
+        <section class="about-content">
+            <div class="mission">
+                <h2>Our Mission</h2>
+                <p>To provide a comprehensive digital platform that enhances the student experience by offering seamless access to academic resources, community engagement, and administrative services. We strive to bridge the gap between students, faculty, and administration through innovative technology solutions that foster academic excellence and personal growth.</p>
+            </div>
+            
+            <div class="vision">
+                <h2>Our Vision</h2>
+                <p>To become the leading student portal platform that transforms how educational institutions connect with their students. We envision a future where every student has easy access to the resources they need to succeed academically and personally, creating a more connected and empowered educational community.</p>
+            </div>
+        </section>
+
+        <section class="stats">
+            <div class="stat-card">
+                <span class="stat-number">5000+</span>
+                <span>Active Students</span>
+            </div>
+            <div class="stat-card">
+                <span class="stat-number">200+</span>
+                <span>Events Hosted</span>
+            </div>
+            <div class="stat-card">
+                <span class="stat-number">50+</span>
+                <span>Courses Available</span>
+            </div>
+            <div class="stat-card">
+                <span class="stat-number">99%</span>
+                <span>Uptime</span>
+            </div>
+        </section>
+
+        <section class="team">
+            <h2>Development Team</h2>
+            <div class="team-grid">
+                <div class="team-member">
+                    <h3>Tvisha ZAVERI</h3>
+                    <p>Lead Developer</p>
+                    <p>Student ID: 24cs108</p>
+                    <p>Full-stack development, UI/UX design, and system architecture</p>
+                </div>
+                <div class="team-member">
+                    <h3>Technical Team</h3>
+                    <p>Support Staff</p>
+                    <p>Backend development, database management, and testing</p>
+                </div>
+                <div class="team-member">
+                    <h3>Design Team</h3>
+                    <p>UI/UX Specialists</p>
+                    <p>User interface design, user experience optimization</p>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2>Key Features</h2>
+            <ul>
+                <li><strong>User Management:</strong> Secure registration and authentication system</li>
+                <li><strong>Event Management:</strong> Browse, register, and manage campus events</li>
+                <li><strong>Profile Management:</strong> Complete student profile with customization options</li>
+                <li><strong>Admin Dashboard:</strong> Comprehensive administrative tools</li>
+                <li><strong>Responsive Design:</strong> Optimized for desktop, tablet, and mobile devices</li>
+                <li><strong>Database Integration:</strong> Robust MySQL database backend</li>
+                <li><strong>Security:</strong> Advanced security measures and data protection</li>
+                <li><strong>Analytics:</strong> Real-time reporting and analytics</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>Technology Stack</h2>
+            <p><strong>Frontend:</strong> HTML5, CSS3, JavaScript (ES6+)</p>
+            <p><strong>Backend:</strong> PHP 8.x, MySQL</p>
+            <p><strong>Development Tools:</strong> VS Code, XAMPP, phpMyAdmin</p>
+            <p><strong>Design Tools:</strong> Figma, Draw.io</p>
+            <p><strong>Version Control:</strong> Git</p>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Student Portal. All rights reserved.</p>
+    <p class="author">Made by Tvisha Zaveri - 24cs108</p>
+    </footer>
+</body>
+</html>

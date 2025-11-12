@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Student Portal</title>
+    <link rel="stylesheet" href="../assets/css/rebrand.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f8f9fa;
+        }
+        
+        header {
+            background: #2c3e50;
+            color: white;
+            padding: 1rem 0;
+        }
+        
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+        }
+        
+        nav a {
+            color: white;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            transition: background 0.3s;
+        }
+        
+        nav a:hover, nav a.active {
+            background: #34495e;
+        }
+        
+        main {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+        
+        .dashboard-header {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+        }
+        
+        .welcome-message {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+        
+        .stat-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            text-align: center;
+            transition: transform 0.3s;
+        }
+        
+        .stat-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .stat-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+        
+        .stat-number {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+        
+        .dashboard-content {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 2rem;
+        }
+        
+        .main-content, .sidebar {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .recent-activity {
+            margin-bottom: 2rem;
+        }
+        
+        .activity-item {
+            display: flex;
+            align-items: center;
+            padding: 1rem;
+            border-left: 4px solid #3498db;
+            background: #f8f9fa;
+            margin-bottom: 1rem;
+            border-radius: 5px;
+        }
+        
+        .activity-icon {
+            font-size: 1.5rem;
+            margin-right: 1rem;
+            width: 40px;
+            text-align: center;
+        }
+        
+        .quick-actions {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+        
+        .action-btn {
+            background: #3498db;
+            color: white;
+            padding: 1rem;
+            text-align: center;
+            border-radius: 8px;
+            text-decoration: none;
+            transition: background 0.3s;
+        }
+        
+        .action-btn:hover {
+            background: #2980b9;
+        }
+        
+        .notification {
+            background: #e8f6f3;
+            border: 1px solid #27ae60;
+            padding: 1rem;
+            border-radius: 5px;
+            margin-bottom: 1rem;
+        }
+        
+        .upcoming-events {
+            list-style: none;
+        }
+        
+        .upcoming-events li {
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #eee;
+        }
+        
+        footer {
+            background: #2c3e50;
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .author {
+            font-style: italic;
+            color: #7f8c8d;
+            margin-top: 1rem;
+        }
+
+        @media (max-width: 768px) {
+            .dashboard-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .welcome-message {
+                flex-direction: column;
+                text-align: center;
+                gap: 1rem;
+            }
+            
+            nav ul {
+                flex-wrap: wrap;
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="registration.html">Registration</a></li>
+                <li><a href="login.html">Login</a></li>
+                <li><a href="dashboard.html" class="active">Dashboard</a></li>
+                <li><a href="events.html">Events</a></li>
+                <li><a href="profile.html">Profile</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="faq.html">FAQ</a></li>
+                <li><a href="admin.html">Admin</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <div class="dashboard-header">
+            <div class="welcome-message">
+                <div>
+                    <h1>Welcome back, TVISHA ZAVERI</h1>
+                    <p>Student ID: 24cs108 | Computer Science Department</p>
+                </div>
+                <div>
+                    <strong>Current Semester: 3rd</strong><br>
+                    <small>Last login: Today, 10:30 AM</small>
+                </div>
+            </div>
+        </div>
+
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-number">6</div>
+                <div>Enrolled Courses</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">3</div>
+                <div>Upcoming Events</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">12</div>
+                <div>Assignments Completed</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">8.5</div>
+                <div>Current GPA</div>
+            </div>
+        </div>
+
+        <div class="dashboard-content">
+            <div class="main-content">
+                <div class="recent-activity">
+                    <h2>Recent Activity</h2>
+                    <div class="activity-item">
+                        <div class="activity-icon">Assignment</div>
+                        <div>
+                            <strong>Assignment Submitted</strong><br>
+                            <small>Web Development - Practical 1 submitted successfully</small><br>
+                            <small>2 hours ago</small>
+                        </div>
+                    </div>
+                    <div class="activity-item">
+                        <div class="activity-icon">Materials</div>
+                        <div>
+                            <strong>Course Material Downloaded</strong><br>
+                            <small>Downloaded lecture notes for Database Management</small><br>
+                            <small>1 day ago</small>
+                        </div>
+                    </div>
+                    <div class="activity-item">
+                        <div class="activity-icon">Event</div>
+                        <div>
+                            <strong>Event Registration</strong><br>
+                            <small>Registered for "Tech Symposium 2025"</small><br>
+                            <small>2 days ago</small>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="quick-actions">
+                    <a href="profile.html" class="action-btn">View Profile</a>
+                    <a href="events.html" class="action-btn">Browse Events</a>
+                    <a href="contact.html" class="action-btn">Contact Support</a>
+                    <a href="#" class="action-btn" onclick="alert('Grades page coming soon!')">View Grades</a>
+                </div>
+            </div>
+
+            <div class="sidebar">
+                <div class="notification">
+                    <h3>Important Notice</h3>
+                    <p>Mid-semester exams will begin from March 15, 2025. Please check your exam schedule.</p>
+                </div>
+
+                <h3>Upcoming Events</h3>
+                <ul class="upcoming-events">
+                    <li>
+                        <strong>Tech Symposium 2025</strong><br>
+                        <small>March 10, 2025 - 9:00 AM</small>
+                    </li>
+                    <li>
+                        <strong>Career Fair</strong><br>
+                        <small>March 20, 2025 - 10:00 AM</small>
+                    </li>
+                    <li>
+                        <strong>Coding Competition</strong><br>
+                        <small>March 25, 2025 - 2:00 PM</small>
+                    </li>
+                </ul>
+
+                <h3 class="mt-2">Quick Links</h3>
+                <ul style="padding: 0; list-style: none;">
+                    <li><a href="#" onclick="alert('Academic calendar coming soon!')">Academic Calendar</a></li>
+                    <li><a href="#" onclick="alert('Library resources coming soon!')">Library Resources</a></li>
+                    <li><a href="#" onclick="alert('Fee payment coming soon!')">Fee Payment</a></li>
+                    <li><a href="#" onclick="alert('Attendance tracker coming soon!')">Attendance Tracker</a></li>
+                </ul>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Student Portal. All rights reserved.</p>
+    <p class="author">Made by Rudra Vaghela - 24cs105</p>
+    </footer>
+</body>
+</html>

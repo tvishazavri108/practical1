@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel - Student Portal</title>
+    <link rel="stylesheet" href="../assets/css/rebrand.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f8f9fa;
+        }
+        
+        header {
+            background: #2c3e50;
+            color: white;
+            padding: 1rem 0;
+        }
+        
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+        }
+        
+        nav a {
+            color: white;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            transition: background 0.3s;
+        }
+        
+        nav a:hover, nav a.active {
+            background: #34495e;
+        }
+        
+        main {
+            max-width: 1400px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+        
+        .admin-header {
+            background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+            color: white;
+            padding: 2rem;
+            border-radius: 10px;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+        
+        .warning-banner {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            color: #856404;
+            padding: 1rem;
+            border-radius: 5px;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+        
+        .admin-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+        
+        .stat-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            text-align: center;
+            transition: transform 0.3s;
+        }
+        
+        .stat-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .stat-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .stat-number {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+        
+        .admin-content {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 2rem;
+        }
+        
+        .admin-sidebar {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            height: fit-content;
+        }
+        
+        .admin-main {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .admin-menu {
+            list-style: none;
+        }
+        
+        .admin-menu li {
+            margin-bottom: 0.5rem;
+        }
+        
+        .admin-menu a {
+            display: block;
+            padding: 1rem;
+            color: #333;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background 0.3s;
+        }
+        
+        .admin-menu a:hover, .admin-menu a.active {
+            background: #3498db;
+            color: white;
+        }
+        
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+        }
+        
+        .data-table th,
+        .data-table td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        .data-table th {
+            background: #f8f9fa;
+            font-weight: bold;
+        }
+        
+        .data-table tr:hover {
+            background: #f8f9fa;
+        }
+        
+        .btn {
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            margin: 0.2rem;
+            transition: background 0.3s;
+        }
+        
+        .btn-primary {
+            background: #3498db;
+            color: white;
+        }
+        
+        .btn-success {
+            background: #27ae60;
+            color: white;
+        }
+        
+        .btn-warning {
+            background: #f39c12;
+            color: white;
+        }
+        
+        .btn-danger {
+            background: #e74c3c;
+            color: white;
+        }
+        
+        .btn:hover {
+            opacity: 0.8;
+        }
+        
+        .form-group {
+            margin-bottom: 1rem;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+        }
+        
+        input, select, textarea {
+            width: 100%;
+            padding: 0.5rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        
+        .quick-actions {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+        
+        .action-card {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 8px;
+            text-align: center;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        
+        .action-card:hover {
+            background: #e9ecef;
+        }
+        
+        footer {
+            background: #2c3e50;
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .author {
+            font-style: italic;
+            color: #7f8c8d;
+            margin-top: 1rem;
+        }
+
+        @media (max-width: 768px) {
+            .admin-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .admin-stats {
+                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            }
+            
+            nav ul {
+                flex-wrap: wrap;
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="registration.html">Registration</a></li>
+                <li><a href="login.html">Login</a></li>
+                <li><a href="dashboard.html">Dashboard</a></li>
+                <li><a href="events.html">Events</a></li>
+                <li><a href="profile.html">Profile</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="faq.html">FAQ</a></li>
+                <li><a href="admin.html" class="active">Admin</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <div class="admin-header">
+            <h1>Admin Panel</h1>
+            <p>Student Portal Administration Dashboard</p>
+        </div>
+
+        <div class="warning-banner">
+            <strong>⚠️ Demo Mode:</strong> This is a demonstration interface. In production, this would require admin authentication and proper security measures.
+        </div>
+
+        <div class="admin-stats">
+            <div class="stat-card">
+                <div class="stat-number">1,247</div>
+                <div>Total Students</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">23</div>
+                <div>Active Events</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">89%</div>
+                <div>System Uptime</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">156</div>
+                <div>New Registrations</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">45</div>
+                <div>Active Courses</div>
+            </div>
+        </div>
+
+        <div class="admin-content">
+            <div class="admin-sidebar">
+                <h3>Admin Menu</h3>
+                <ul class="admin-menu">
+                    <li><a href="#" class="active" onclick="showSection('dashboard')">Dashboard</a></li>
+                    <li><a href="#" onclick="showSection('users')">User Management</a></li>
+                    <li><a href="#" onclick="showSection('events')">Event Management</a></li>
+                    <li><a href="#" onclick="showSection('content')">Content Management</a></li>
+                    <li><a href="#" onclick="showSection('reports')">Reports</a></li>
+                    <li><a href="#" onclick="showSection('settings')">System Settings</a></li>
+                    <li><a href="#" onclick="showSection('logs')">Activity Logs</a></li>
+                    <li><a href="#" onclick="showSection('backup')">Backup & Security</a></li>
+                </ul>
+
+                <div class="mt-2" style="padding-top: 2rem; border-top: 1px solid #eee;">
+                    <h4>Quick Stats</h4>
+                    <ul style="margin-top: 1rem; list-style: none;">
+                        <li>📈 Today's Logins: 342</li>
+                        <li>📝 New Registrations: 12</li>
+                        <li>🎯 Event Registrations: 89</li>
+                        <li>📞 Support Tickets: 7</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="admin-main">
+                <div id="dashboard" class="admin-section">
+                    <h2>Dashboard Overview</h2>
+                    
+                    <div class="quick-actions">
+                        <div class="action-card" onclick="alert('User management feature')">
+                            <h4>Manage Users</h4>
+                            <p>Add, edit, or remove student accounts</p>
+                        </div>
+                        <div class="action-card" onclick="alert('Event management feature')">
+                            <h4>Manage Events</h4>
+                            <p>Create and manage campus events</p>
+                        </div>
+                        <div class="action-card" onclick="alert('Content management feature')">
+                            <h4>Update Content</h4>
+                            <p>Modify portal content and announcements</p>
+                        </div>
+                        <div class="action-card" onclick="alert('Reports feature')">
+                            <h4>View Reports</h4>
+                            <p>Generate and download analytics reports</p>
+                        </div>
+                    </div>
+
+                    <h3>Recent Activity</h3>
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Time</th>
+                                <th>User</th>
+                                <th>Action</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>10:30 AM</td>
+                                <td>rudra.vaghela@student.edu</td>
+                                <td>Login</td>
+                                <td><span class="btn btn-success">Success</span></td>
+                            </tr>
+                            <tr>
+                                <td>10:25 AM</td>
+                                <td>admin@portal.edu</td>
+                                <td>Event Created</td>
+                                <td><span class="btn btn-success">Success</span></td>
+                            </tr>
+                            <tr>
+                                <td>10:20 AM</td>
+                                <td>john.doe@student.edu</td>
+                                <td>Registration</td>
+                                <td><span class="btn btn-success">Success</span></td>
+                            </tr>
+                            <tr>
+                                <td>10:15 AM</td>
+                                <td>jane.smith@student.edu</td>
+                                <td>Event Registration</td>
+                                <td><span class="btn btn-success">Success</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div id="users" class="admin-section hidden">
+                    <h2>User Management</h2>
+                    <button class="btn btn-primary" onclick="alert('Add new user functionality')">+ Add New User</button>
+                    
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Student ID</th>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Department</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>24cs105</td>
+                                <td>Rudra Vaghela</td>
+                                <td>rudra.vaghela@student.edu</td>
+                                <td>Computer Science</td>
+                                <td><span class="btn btn-success">Active</span></td>
+                                <td>
+                                    <button class="btn btn-primary" onclick="alert('Edit user')">Edit</button>
+                                    <button class="btn btn-warning" onclick="alert('Suspend user')">Suspend</button>
+                                    <button class="btn btn-danger" onclick="alert('Delete user')">Delete</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>23CS055</td>
+                                <td>John Doe</td>
+                                <td>john.doe@student.edu</td>
+                                <td>Computer Science</td>
+                                <td><span class="btn btn-success">Active</span></td>
+                                <td>
+                                    <button class="btn btn-primary" onclick="alert('Edit user')">Edit</button>
+                                    <button class="btn btn-warning" onclick="alert('Suspend user')">Suspend</button>
+                                    <button class="btn btn-danger" onclick="alert('Delete user')">Delete</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div id="events" class="admin-section hidden">
+                    <h2>Event Management</h2>
+                    <button class="btn btn-primary" onclick="alert('Create new event functionality')">+ Create New Event</button>
+                    
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Event Name</th>
+                                <th>Date</th>
+                                <th>Registrations</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Tech Symposium 2025</td>
+                                <td>March 10, 2025</td>
+                                <td>245/300</td>
+                                <td><span class="btn btn-success">Active</span></td>
+                                <td>
+                                    <button class="btn btn-primary" onclick="alert('Edit event')">Edit</button>
+                                    <button class="btn btn-warning" onclick="alert('View registrations')">Registrations</button>
+                                    <button class="btn btn-danger" onclick="alert('Cancel event')">Cancel</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Cultural Night</td>
+                                <td>March 8, 2025</td>
+                                <td>189/200</td>
+                                <td><span class="btn btn-success">Active</span></td>
+                                <td>
+                                    <button class="btn btn-primary" onclick="alert('Edit event')">Edit</button>
+                                    <button class="btn btn-warning" onclick="alert('View registrations')">Registrations</button>
+                                    <button class="btn btn-danger" onclick="alert('Cancel event')">Cancel</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div id="settings" class="admin-section hidden">
+                    <h2>System Settings</h2>
+                    
+                    <div class="form-group">
+                        <label for="siteName">Site Name</label>
+                        <input type="text" id="siteName" value="Student Portal">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="adminEmail">Admin Email</label>
+                        <input type="email" id="adminEmail" value="admin@studentportal.edu">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="maxUsers">Maximum Users</label>
+                        <input type="number" id="maxUsers" value="5000">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="maintenance">Maintenance Mode</label>
+                        <select id="maintenance">
+                            <option value="off">Off</option>
+                            <option value="on">On</option>
+                        </select>
+                    </div>
+                    
+                    <button class="btn btn-primary" onclick="alert('Settings saved!')">Save Settings</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Student Portal. All rights reserved.</p>
+    <p class="author">Made by Rudra Vaghela - 24cs105</p>
+    </footer>
+
+    <script>
+        function showSection(sectionId) {
+            // Hide all sections by adding .hidden
+            document.querySelectorAll('.admin-section').forEach(section => {
+                section.classList.add('hidden');
+            });
+
+            // Remove active class from all menu items
+            document.querySelectorAll('.admin-menu a').forEach(link => {
+                link.classList.remove('active');
+            });
+
+            // Show selected section
+            document.getElementById(sectionId).classList.remove('hidden');
+
+            // Add active class to clicked menu item
+            event.target.classList.add('active');
+        }
+    </script>
+</body>
+</html>
